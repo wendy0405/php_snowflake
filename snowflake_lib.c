@@ -10,26 +10,23 @@
 
 struct globle g_info;
 #define  sequenceMask (-1L ^ (-1L << 12L))
-
-void set_workid(int workid)
+void set_workid()
 {
- g_info.workid = workid;
+ g_info.workid = gettid();
 }
-
 pid_t gettid( void )
 {
 	return syscall( __NR_gettid );
 }
-
 uint64_t get_curr_ms()
 {
 	struct timeval time_now;
 	gettimeofday(&time_now,NULL);
-	ms_time1 = (uint64_t)time_now.tv_sec*1000 + (uint64_t)time_now.tv_usec/1000;
+	uint64_t ms_time = time_now.tv_sec*1000 + time_now.tv_usec/1000;
 	return ms_time;
 }
 
-uint64_t wait_next_ms(uint64_t lastStamp)
+uint64_t wait_next_ms(int64_t lastStamp)
 {
 	uint64_t cur = 0;
 	do {
@@ -37,13 +34,11 @@ uint64_t wait_next_ms(uint64_t lastStamp)
 	} while (cur <= lastStamp);
 	return cur;
 }
-
 int atomic_incr(int id)
 {
 	__sync_add_and_fetch( &id, 1 );
 	return id;
 }
-
 int64_t get_unique_id()
 {
 	int64_t  uniqueId = 0;
@@ -58,7 +53,7 @@ int64_t get_unique_id()
 	}
 	if (nowtime == g_info.last_stamp)
 	{
-		g_info.seqid = atomic_incr(g_info.seqid)& 0xfff;
+		g_info.seqid = atomic_incr(g_info.seqid)& sequenceMask;
 		if (g_info.seqid ==0)
 		{
 			nowtime = wait_next_ms(g_info.last_stamp);

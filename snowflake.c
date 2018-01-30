@@ -146,13 +146,14 @@ PHP_MINFO_FUNCTION(snowflake)
 /* {{{ proto int uuid() */
 PHP_FUNCTION(uuid)
 {
-	long params;
+	//long params;
     TSRMLS_FETCH();
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l",&params) == SUCCESS){
-		set_workid(params);
-	}else{
-		set_workid(100);
-	}
+	// if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l",&params) == SUCCESS){
+		// set_workid(params);
+	// }else{
+		// set_workid(100);
+	// }
+	set_workid();
     int64_t ret = get_unique_id();
     if (ret) {
         RETURN_LONG(ret);

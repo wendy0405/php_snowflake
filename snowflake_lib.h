@@ -20,7 +20,7 @@ typedef struct globle
 	int seqid;
 } globle;
 
-void set_workid(int workid);
+void set_workid();
 pid_t gettid( void );
 uint64_t get_curr_ms();
 uint64_t wait_next_ms(int64_t lastStamp);

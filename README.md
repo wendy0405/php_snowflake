@@ -7,7 +7,7 @@
 * phpize
 * ./configure
 * make && make install
-* add this snowflake.so to php.ini
+* 将扩展添加至php.ini
 * restart php
 ## use in php
 ```javascript

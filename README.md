@@ -11,7 +11,7 @@
 * restart php
 ## use in php
 ```javascript
-    $id = uuid(getmypid());
+    $id = uuid();
     echo $id;
 ```
 ## 有问题反馈

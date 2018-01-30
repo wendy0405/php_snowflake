@@ -1,6 +1,6 @@
-##php_snowflake
+## php_snowflake
 基于snowflake版的php唯一自增id扩展
-##how to use
+## how to use
 
 * git clone
 * cd /php_snowflake
@@ -9,10 +9,10 @@
 * make && make install
 * add this snowflake.so to php.ini
 * restart php
-##use in php
+## use in php
 ```javascript
     $id = uuid(getmypid());
     echo $id;
 ```
-##有问题反馈
+## 有问题反馈
 在使用中有任何问题，欢迎反馈给我
